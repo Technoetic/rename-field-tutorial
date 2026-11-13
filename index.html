@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f5f3eb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121e27" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="같은 값, 더 분명한 이름. 가상의 카페 주문 데이터를 직접 바꾸며 Rename Field를 배우는 한국어 인터랙티브 튜토리얼.">
+  <meta name="app-build" content="__BUILD_ID__">
+  <title>RENAME / FIELD — 같은 값, 더 분명한 이름</title>
+  <link rel="icon" type="image/svg+xml" href="__ICON_URL__">
+  <link rel="stylesheet" href="__STYLE_URL__">
+</head>
+<body>
+<button class="skip-link" type="button" data-skip>본문으로 건너뛰기</button>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="topbar-row">
+      <a class="brand" href="#/" data-route="/" aria-label="Rename Field 처음 화면"><img src="__ICON_URL__" alt="" width="30" height="30"><span lang="en">RENAME <span class="brand-slash">/</span> FIELD</span></a>
+      <span class="edition" lang="en">AN INTERACTIVE REFACTORING GUIDE</span>
+      <div class="settings">
+        <button class="pill-btn" type="button" id="theme-toggle"><span aria-hidden="true">◐</span><span class="theme-label">테마: 자동</span></button>
+        <button class="pill-btn motion-button" type="button" id="motion-toggle" aria-pressed="false"><span aria-hidden="true">≈</span><span>움직임 줄이기</span></button>
+      </div>
+    </div>
+    <nav class="nav-links" aria-label="학습 메뉴">
+      <a href="#/story" data-route="/story"><span aria-hidden="true">01</span>이야기</a>
+      <a href="#/lab" data-route="/lab"><span aria-hidden="true">02</span>이름 바꾸기 실험</a>
+      <a href="#/contract" data-route="/contract"><span aria-hidden="true">03</span>데이터의 약속</a>
+      <a href="#/practice" data-route="/practice"><span aria-hidden="true">04</span>연습</a>
+      <a href="#/code" data-route="/code"><span aria-hidden="true">05</span>코드</a>
+      <a href="#/summary" data-route="/summary"><span aria-hidden="true">06</span>정리</a>
+    </nav>
+  </header>
+  <aside class="update-banner" id="update-banner" aria-live="polite" hidden></aside>
+  <main id="app" tabindex="-1"><section class="state-panel" data-state="loading" role="status"><span class="spinner" aria-hidden="true"></span><p>주문 데이터를 펼치는 중…</p><p class="slow-hint">오래 걸리면 페이지를 새로고침해 주세요.</p></section></main>
+  <footer class="site-footer">
+    <a href="#/" class="footer-brand" data-route="/" lang="en">RENAME / FIELD <span aria-hidden="true">↗</span></a>
+    <div><p lang="en">CLEARER NAME. SAME VALUE.</p><p>가상의 카페 주문으로 배우는 작은 리팩토링.</p></div>
+    <p class="footer-source"><a href="https://refactoring.com/catalog/renameField.html" target="_blank" rel="noopener noreferrer">Martin Fowler의 원전 읽기 ↗</a><span class="build-pill" title="현재 실행 버전">__BUILD_ID__</span></p>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<dialog class="modal" id="guard-dialog" aria-labelledby="guard-title" aria-describedby="guard-description">
+  <div class="modal-card">
+    <p class="eyebrow" lang="en">KEEP YOUR PROGRESS</p>
+    <h2 id="guard-title">아직 저장하지 않은 내용이 있어요</h2>
+    <p id="guard-description">실험 상태 또는 연습 답과 메모를 이 브라우저에 저장한 뒤 이동할 수 있어요.</p>
+    <p id="guard-error" class="form-error" role="alert" hidden></p>
+    <div class="actions">
+      <button class="btn btn-primary" type="button" data-guard="save">저장 후 이동</button>
+      <button class="btn btn-secondary" type="button" data-guard="stay">계속 머무르기</button>
+      <button class="btn btn-ghost" type="button" data-guard="discard">변경 버리고 이동</button>
+    </div>
+  </div>
+</dialog>
+<noscript><p class="noscript">이 튜토리얼은 JavaScript를 켠 브라우저에서 볼 수 있어요.</p></noscript>
+<script type="module" src="__ENTRY_URL__"></script>
+</body>
+</html>

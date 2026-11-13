@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "before": ["const order = { amt: 10000 };", "console.log(order.amt);"],
+  "after": ["const order = { totalAmount: 10000 };", "console.log(order.totalAmount);"],
+  "explanation": "객체의 키 amt와 그 키를 읽는 코드가 함께 totalAmount로 바뀝니다. 객체를 가리키는 변수 order와 출력값 10000은 그대로입니다. 영수증에 보이는 문구만 바꾸는 작업과도 다릅니다. 이 예제는 이 튜토리얼을 위해 새로 작성했습니다.",
+  "output": 10000
+}

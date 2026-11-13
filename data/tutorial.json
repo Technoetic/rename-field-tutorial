@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "meta": {
+    "appTitle": "RENAME / FIELD",
+    "htmlTitle": "Rename Field — 이름을 바꾸고, 뜻을 남기다",
+    "tagline": "이름을 바꾸고, 뜻을 남기다.",
+    "description": "가상의 카페 주문으로 배우는 Rename Field. amt를 totalAmount로 바꾸고, 데이터를 만드는 곳과 읽는 곳을 함께 맞춰 봅니다."
+  },
+  "routes": [
+    {"path": "/", "title": "시작", "shortTitle": "시작"},
+    {"path": "/story", "title": "카페의 주문 한 건", "shortTitle": "이야기"},
+    {"path": "/lab", "title": "필드 이름 바꾸기", "shortTitle": "실험실"},
+    {"path": "/contract", "title": "이름도 약속이다", "shortTitle": "약속"},
+    {"path": "/practice", "title": "직접 판단하기", "shortTitle": "연습"},
+    {"path": "/code", "title": "코드로 확인하기", "shortTitle": "코드"},
+    {"path": "/summary", "title": "다음 코드에 적용하기", "shortTitle": "정리"}
+  ],
+  "screens": {
+    "home": {"eyebrow": "REFACTORING / 01", "title": "숫자는 그대로, 이름은 또렷하게.", "lead": "amt에 담긴 10000. 무슨 금액인지, 이름만 보고도 알 수 있을까요? 카페 주문 한 건의 필드 이름을 함께 바꿔 봅시다."},
+    "story": {"eyebrow": "01 / THE STORY", "title": "이 10000은 무슨 금액일까?", "lead": "가상의 작은 카페에 라테 두 잔 주문이 들어왔습니다. 한 잔에 5000원, 주문 합계는 10000원입니다."},
+    "lab": {"eyebrow": "02 / RENAME LAB", "title": "만드는 곳부터, 읽는 곳까지.", "lead": "새 필드 이름을 정하고 주문 생성 코드, 영수증, 매출 보고서를 차례로 맞춰 보세요. 이름이 어긋나면 어느 곳에서 값을 읽지 못하는지 확인할 수 있습니다."},
+    "contract": {"eyebrow": "03 / THE CONTRACT", "title": "다른 코드도 이 이름을 믿고 있다면.", "lead": "외부 API의 소비자가 amt를 읽고 있다면 이름 변경은 약속 변경이 됩니다. 기존 소비자와 새 소비자가 함께 이동할 방법을 살펴봅니다."},
+    "practice": {"eyebrow": "04 / YOUR TURN", "title": "이름을 고치는 판단, 여섯 번.", "lead": "상황을 읽고 답을 고른 뒤 확인해 보세요. 답과 메모는 저장을 누르면 이 브라우저에만 남습니다."},
+    "code": {"eyebrow": "05 / THE CODE", "title": "바뀐 것은 필드 이름. 남은 것은 10000.", "lead": "변경 전후를 나란히 읽어 보세요. 객체를 가리키는 변수 order는 그대로이고, 객체의 키와 그 키를 읽는 코드가 함께 바뀝니다."},
+    "summary": {"eyebrow": "06 / TAKE IT WITH YOU", "title": "좋은 이름은, 읽는 사람을 돕는다.", "lead": "Rename Field는 데이터의 뜻을 더 잘 드러내기 위해 필드 이름과 사용처를 함께 고치는 리팩토링입니다. 값과 동작이 유지되는지 확인하세요."}
+  },
+  "story": {
+    "oldLabel": "amt",
+    "newLabel": "totalAmount",
+    "value": 10000,
+    "steps": [
+      {"title": "짧은 이름 뒤의 뜻 찾기", "body": "order는 주문 객체를 가리키는 변수입니다. 그 객체의 amt라는 필드에 주문 합계 10000이 들어 있습니다. 먼저 이 값이 세금인지 할인액인지, 주문 전체 금액인지 확인합니다."},
+      {"title": "뜻을 드러내는 필드 이름 정하기", "body": "이 카페에서는 주문 전체 금액을 totalAmount로 부르기로 했습니다. amt를 totalAmount로 바꾸되 10000은 그대로 둡니다. 이름의 적절함은 도메인을 이해하는 사람이 판단해야 합니다."},
+      {"title": "읽는 곳도 같은 이름으로 맞추기", "body": "영수증과 매출 보고서도 order.totalAmount를 읽도록 바꿉니다. 변수 order의 이름을 바꾸는 Rename Variable과는 다릅니다. 화면의 ‘주문 합계’ 문구만 바꿔도 객체의 키는 바뀌지 않습니다."}
+    ]
+  },
+  "summary": {
+    "points": [
+      "필드가 실제로 어떤 뜻인지 먼저 확인하고, 팀의 용어에 맞는 이름을 고릅니다.",
+      "데이터를 만드는 곳과 그 필드를 읽고 쓰는 사용처를 함께 찾습니다.",
+      "필드 이름을 바꾼 뒤 값과 관찰 가능한 동작이 유지되는지 검증합니다.",
+      "변수 이름 변경, 화면 문구 변경, 값 변환과 구분합니다.",
+      "외부 API나 저장된 데이터가 연결되어 있다면 소비자와 전환 계획을 세웁니다. 임시로 두 키를 제공할 때도 값을 맞추고, 이전 계약을 언제 없앨지 합의합니다.",
+      "이 실험은 가상의 객체만 바꿉니다. 실제 데이터베이스 열 변경에는 별도의 마이그레이션과 호환성 검토가 필요합니다."
+    ],
+    "sources": [
+      {"title": "Martin Fowler · Rename Field 원문", "url": "https://refactoring.com/catalog/renameField.html"}
+    ]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "draft": {"noteMaxLength": 1000},
+  "items": [
+    {
+      "id": "field-meaning",
+      "title": "01 · 무엇을 바꾸나요?",
+      "story": "카페 주문 객체에 amt: 10000이 있습니다. amt가 주문 전체 금액이라는 뜻을 더 잘 드러내고 싶습니다.",
+      "question": "Rename Field의 목표에 맞는 변경은 무엇인가요?",
+      "choices": [
+        {"id": "rename", "label": "필드 amt를 totalAmount로 바꾸고, 값 10000은 유지한다."},
+        {"id": "convert", "label": "필드 amt는 유지하고, 값 10000을 10으로 바꾼다."},
+        {"id": "delete", "label": "필드 amt와 값을 모두 삭제한다."}
+      ],
+      "answer": "rename",
+      "explanation": "이름이 더 분명해져도 주문 합계의 뜻과 값은 유지되어야 합니다. 단위를 바꾸거나 필드를 삭제하는 것은 다른 변경입니다."
+    },
+    {
+      "id": "variable-or-field",
+      "title": "02 · 변수와 필드는 다른 자리",
+      "story": "코드가 const order = { amt: 10000 }; 입니다. 이번 작업은 객체 안의 amt를 totalAmount로 바꾸는 것입니다.",
+      "question": "order를 cafeOrder로 바꾸는 작업은 무엇인가요?",
+      "choices": [
+        {"id": "field", "label": "같은 Rename Field다. 객체 안의 키도 자동으로 바뀐다."},
+        {"id": "variable", "label": "Rename Variable이다. 객체의 필드 amt는 그대로다."},
+        {"id": "value", "label": "값을 바꾸는 작업이다. 주문 합계도 바뀐다."}
+      ],
+      "answer": "variable",
+      "explanation": "order는 객체를 가리키는 변수이고 amt는 그 객체의 필드입니다. 변수만 cafeOrder로 바꿔도 cafeOrder.amt라는 필드는 그대로 남습니다."
+    },
+    {
+      "id": "reader-sync",
+      "title": "03 · 보고서의 빈칸",
+      "story": "주문 생성 코드는 { totalAmount: 10000 }을 만듭니다. 영수증은 totalAmount를 읽지만 매출 보고서는 아직 amt를 읽습니다.",
+      "question": "매출 보고서가 합계를 읽지 못하는 이유와 다음 조치는 무엇인가요?",
+      "choices": [
+        {"id": "zero", "label": "금액이 0으로 바뀌었으니 합계를 다시 계산한다."},
+        {"id": "sync", "label": "읽는 키가 달라졌으니 보고서도 totalAmount를 읽도록 맞춘다."},
+        {"id": "label", "label": "보고서 제목만 ‘주문 합계’로 바꾼다."}
+      ],
+      "answer": "sync",
+      "explanation": "값 10000은 새 키에 남아 있습니다. 보고서가 없는 키 amt를 찾고 있으므로 사용처도 함께 바꿔야 합니다. 빈 값을 임의로 0으로 대체하면 이 불일치를 숨길 수 있습니다."
+    },
+    {
+      "id": "label-vs-key",
+      "title": "04 · 영수증 문구만 고쳤다면",
+      "story": "화면의 ‘금액’ 문구를 ‘주문 합계’로 바꿨습니다. 데이터는 { amt: 10000 }이고 코드는 여전히 order.amt를 읽습니다.",
+      "question": "객체의 필드 이름도 바뀌었나요?",
+      "choices": [
+        {"id": "yes", "label": "그렇다. 화면의 문구가 데이터 키를 자동으로 바꾼다."},
+        {"id": "no", "label": "아니다. 표시 문구만 바뀌었고 필드 키는 amt다."},
+        {"id": "amount", "label": "필드 이름은 같지만 값이 다른 금액으로 바뀌었다."}
+      ],
+      "answer": "no",
+      "explanation": "사람이 보는 표시 문구와 코드가 쓰는 객체 키는 별개입니다. Rename Field를 하려면 실제 키와 그 키를 사용하는 코드를 바꿔야 합니다."
+    },
+    {
+      "id": "contract-handover",
+      "title": "05 · 다른 서비스와의 약속",
+      "story": "외부 서비스가 카페 API의 amt를 읽습니다. 새 소비자는 totalAmount를 읽기 시작했고, 모든 소비자를 한 번에 바꿀 수는 없습니다.",
+      "question": "호환성을 고려한 전환 방법은 무엇인가요?",
+      "choices": [
+        {"id": "break", "label": "바로 amt를 없앤다. 이전 소비자도 알아서 새 이름을 읽을 것이다."},
+        {"id": "handover", "label": "전환 기간에 같은 값의 두 키를 제공하고, 소비자 이전을 확인한 뒤 이전 계약을 종료한다."},
+        {"id": "forever", "label": "소비자 확인 없이 두 키를 영원히 따로 관리한다."}
+      ],
+      "answer": "handover",
+      "explanation": "공개된 필드 이름은 소비자와의 계약입니다. 두 키 제공은 가능한 임시 전환 전략이며, 값의 일치와 이전 일정, 이전 키의 종료를 함께 관리해야 합니다. 실제 API나 데이터베이스의 전환은 이 실험 밖에서 따로 설계합니다."
+    },
+    {
+      "id": "naming-judgment",
+      "title": "06 · 모두 초록불이면 좋은 이름일까요?",
+      "story": "필드 이름을 x로 바꾸고 생성 코드, 영수증, 보고서를 모두 맞췄습니다. 세 곳에서 여전히 10000을 읽습니다.",
+      "question": "이 결과로 판단할 수 있는 것은 무엇인가요?",
+      "choices": [
+        {"id": "automatic", "label": "모든 곳이 동작하므로 x가 도메인에서 가장 좋은 이름이다."},
+        {"id": "human", "label": "사용처의 구조는 맞지만, 이름이 뜻을 잘 드러내는지는 사람이 따로 판단해야 한다."},
+        {"id": "convert", "label": "이름이 짧아졌으므로 값도 작아진 것이다."}
+      ],
+      "answer": "human",
+      "explanation": "정상 동작은 이름의 의미까지 보증하지 않습니다. 주문 전체 금액이라는 뜻, 팀의 용어와 단위를 이해한 사람이 totalAmount 같은 이름이 적절한지 검토해야 합니다."
+    }
+  ]
+}

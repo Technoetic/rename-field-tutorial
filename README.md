@@ -2,7 +2,7 @@
 
 **같은 값, 더 분명한 이름.** 가상의 카페 주문 데이터에서 `amt`를 `totalAmount`로 바꾸며 Rename Field를 배우는 한국어 인터랙티브 튜토리얼입니다. 객체의 필드, 객체를 가리키는 변수, 화면의 표시 문구를 구분하고, 데이터를 만드는 곳과 읽는 곳의 이름을 함께 맞춥니다.
 
-배포 대상: [Technoetic/rename-field-tutorial의 GitHub Pages](https://technoetic.github.io/rename-field-tutorial/). 정적 파일만 제공하며, 공개 배포와 브라우저 최종 검증은 아직 진행 중입니다.
+실행: [GitHub Pages에서 튜토리얼 열기](https://technoetic.github.io/rename-field-tutorial/). 정적 파일만 제공하며 별도 서버나 계정이 필요하지 않습니다.
 
 ## 학습 화면
 
